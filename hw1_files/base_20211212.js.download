@@ -1,0 +1,198 @@
+/* 팝업 */
+var closePopup = function(objname){
+	document.getElementById(objname).style.display = "none";
+}
+
+var openPopup = function(objname){
+	document.getElementById(objname).style.display = "block";
+}
+
+$(document).ready(function(){
+	/*스와이프 푸터 오류수정*/
+	/*var uagent = navigator.userAgent.toLowerCase(); //유저에이전트 문자열을 얻어 소문자로 변환
+		//모바일 user-agent 판단
+		var ret1 = uagent.search("android");
+		var ret2 = uagent.search("iphone");
+		if(ret1 > -1){
+			$('#footer>.quick').css('position','absolute').css('bottom','0');
+			$(window).scroll(function(){
+				var position = $(window).scrollTop();
+				$("#footer>.quick").stop().animate({"bottom":-position+"px"},-600);
+			});
+		};*/
+		
+	/*메뉴 네비게이션*/
+	$(".gnb>ul>li>dl>dt>a").on("mouseover focus",function(){
+		$('.gnb>ul>li').removeClass('on');
+		$(this).parents("li").addClass('on');
+	})
+	
+	/*메뉴 펼치기*/
+	if (FirstForderName != "")
+	{
+		$("#"+FirstForderName).addClass("on");
+
+		$("#"+FirstForderName+">dl>dd a").each(function(){
+			if ($(this).attr("href") == "/"+FirstForderName+"/"+FirstUrlName)
+			{
+				$(this).addClass("on");
+				//$(this).children("img").attr("src",$(this).children("img").attr('src').replace('.gif','on.gif'));
+			}
+		});
+	};
+
+	/*메뉴탭바*/
+	/*$(".gnb>ul>li>dl>dd>a").hover(
+		function(){
+			if ($(this).attr('class')!='on')
+			{
+				$(this).find("img").attr("src",$(this).find("img").attr('src').replace('.gif','on.gif'));
+			};
+		},function(){
+			if ($(this).attr('class')!='on')
+			{
+				$(this).find("img").attr("src",$(this).find("img").attr('src').replace('on.gif','.gif'));
+			};
+	});*/
+	
+
+	/*푸터 txt*/
+	//$(".footer.over>li>a").hover(
+	//	function(){
+	//		if ($(this).attr('class')!='on')
+	//		{
+	//			$(this).find("img").attr("src",$(this).find("img").attr('src').replace('.gif','_on.gif'));
+	//		};
+	//	},function(){
+	//		if ($(this).attr('class')!='on')
+	//		{
+	//			$(this).find("img").attr("src",$(this).find("img").attr('src').replace('_on.gif','.gif'));
+	//		};
+	//});
+
+	/*푸터 slide*/
+	//$("#footer>.quick").css('display','none');
+	//$("#footer>.btn_quick>a").click(function(){
+	//	$("#footer>.bg").slideDown(300);
+	//	$("#footer>.quick").slideDown(300);
+	//	return false;
+	//});
+	//$("#footer>.quick>.btn_quick>a").click(function(){
+	//	$("#footer>.bg").slideUp(300);
+	//	$("#footer>.quick").slideUp(300);
+	//	return false;
+	//});
+	//$(window).scroll(function(){
+	//	var position = $(window).scrollTop();
+	//	$("#footer>.quick").stop().animate({"bottom":-position+"px"},-600);
+	//});
+
+	/*헤더메뉴 slide*/
+	$("#header .btn_menu").on("click focus",function(){
+		$("body").addClass("quick_open")
+		return false;
+	});
+	$("#header .quick_cot .close, #header .quick_cot .bg").on("click focus",function(){
+		$("body").removeClass("quick_open")
+		return false;
+	})
+	
+	$(".quick_cot").on("click",function(e){
+		if(e.target.className == "quick"){
+		console.log(1)
+		} else{console.log(2)}
+	})
+
+	swiperUI();
+});
+
+//한글제한
+function hangul_chk(id){
+	var str = "ABCDEFGHIJKLMNOPQRSTUVWXYZabcdefghijklmnopqrstuvwxyz1234567890!@#$^*()_+-=|\{}[]~";
+	for (i=0; i< id.length; i++)
+	{
+		idcheck = id.charAt(i);
+		for ( j = 0 ;  j < str.length ; j++)
+		{
+			if (idcheck == str.charAt(j)) break;
+			if (j+1 == str.length)
+			{
+				return false;
+			}
+		}
+	}
+	return true;
+}
+
+function LocMove(urls){
+	if (urls == "")
+	{
+		urls = "/";
+	}
+//	top.location.href=urls;
+	top.location.replace(urls);     
+
+
+
+}
+
+function GetCookie(cKey) {
+	var allcookies = document.cookie;
+	var cookies = allcookies.split("; ");
+	for (var i = 0; i < cookies.length; i++) {
+		var keyValues = cookies[i].split("=");
+		if (keyValues[0] == cKey) {
+			return unescape(keyValues[1]);
+		}
+	}
+	return "";
+}
+
+function swiperUI(){
+	
+	if($('.sub_swiper').length > 0){
+		var $on = $('.sub_swiper .on').index();
+		var subSwiper = new Swiper('.sub_swiper', {
+			pagination: '.swiper-pagination',
+			slidesPerView: 'auto',
+			freeMode: true,
+			paginationClickable: true,
+			initialSlide:$on-1
+		});
+	}
+	
+	var menuLength = $('.menu_swiper .swiper-slide').length;
+	if(menuLength > 1){
+		var menuSwiper = new Swiper('.menu_swiper', {
+			pagination: '.menu_pagination',
+			nextButton: '.btn_menu_next',
+			prevButton: '.btn_menu_prev',
+			paginationClickable: true,
+			loop: true,
+			centeredSlides: true
+		});
+	}else{
+		$('.menu .btn_prev, .menu .btn_next').hide()
+	}
+}
+/* 소이바베큐 버튼 */
+$(function(){
+	//soyUi();
+	function soyUi() {
+		var menuName = $('.menuname'),
+		menuSlide = $('.swiper-wrapper'),
+		menuSlideLi = menuSlide.find('.swiper-slide-duplicate-active'),
+		soyBtnWrap = $('.soyBtnWrap');
+
+		soyBtnWrap.hide();
+
+		if(menuSlideLi.find('.menuname').text() == '소이바베큐'){
+			soyBtnWrap.show();
+		}else {
+			soyBtnWrap.hide();
+		}
+	}
+	//$('.menu_pagination, .btn_prev, .btn_next').on('click',function(){
+	//	soyUi();
+	//})
+})

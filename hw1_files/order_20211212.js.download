@@ -1,0 +1,181 @@
+﻿function OrderProcess(totprice,orderprice){
+	var f = document.orderForm;
+	var NextChk = true;
+	var memolength = vgetStrByte(orderForm.order_memo.value);
+	if (memolength > 30)
+	{
+		alert("최대메모 글자수를 초과하였습니다.\n한글 30자이내로 작성해 주세요.");
+		NextChk = false;
+		return;
+	}
+
+
+	if(f.confirmchk.value!="Y") {
+		alert("휴대폰 인증 후 결제가 가능합니다.");
+		f.confirmchk.focus();	
+		return;
+	}
+
+	if((f.hp2.value=="") || (f.hp3.value=="")) {
+		alert("주문 받을 연락처를 입력해 주세요.");
+		if(f.hp2.value=="") {
+			f.hp2.focus();
+			return;
+		}
+		if(f.hp3.value=="") {
+			f.hp3.focus();
+			return;
+		}
+		NextChk = false;
+		return;
+	}
+
+	// 전송위치설정
+	//if(parseInt(f.list_price.value) < 11000 && cartFrame.document.getElementById("coupon_11st_flag").value=="N" && cartFrame.document.getElementById("coupon_kt_flag").value=="N" && cartFrame.document.getElementById("coupon_gs_flag").value=="N"){
+	if(parseInt(totprice) < 0)
+	{
+		NextChk = false;
+		if(confirm('총주문금액이 0원을 넘어야 주문가능합니다.\n확인을 누르시면 메뉴 선택화면으로 이동합니다.'))
+		{
+			//MenuList();
+			document.location.htef="/order/payment.html";
+		}
+		else
+		{
+			return;
+		}
+	}
+
+	if(f.BranchID.value == "" || f.CustSeq.value == "" || f.CustSeq.value == "0" )
+	{
+		NextChk = false;
+		if(confirm('배달주소를 선택하여 주십시오\n확인을 누르시면 배달주소 선택화면으로 이동합니다.'))
+		{
+			//AddressList();
+			document.location.htef="/order/payment.html";
+		}
+		else
+		{
+			return;
+		}
+	}
+	// 결제수단에 따라 출력되는 메시지가 다름
+	var msg = "";
+	var payhowval = "";
+	payhowval = OrderTypertn(f.pay_how);
+	if (parseInt(totprice) > 0 ||  coupon_ck2()) 
+	{
+		if(parseInt(orderprice) == 0 && payhowval.length == 0)
+		{
+
+			msg = "쿠폰만으로 결제를 선택하셨습니다.\n확인을 누르시면 주문이 완료 됩니다.";
+		}
+		else
+		{
+			if(payhowval=="card")
+			{
+				//msg = "카드결제를 선택하셨습니다.\n확인을 누르시면 주문이 완료 됩니다.";
+				msg = "결제 완료 후에는 주문의 취소가 불가능합니다. \n불가피하게 취소를 원하실 경우 고객센터(1588-9282)로 문의하여 주세요."
+			}
+			else if (payhowval=="cash")
+			{
+				//msg = "계좌이체를 선택하셨습니다.\n확인을 누르시면 주문이 완료 됩니다.";
+				msg = "결제 완료 후에는 주문의 취소가 불가능합니다. \n불가피하게 취소를 원하실 경우 고객센터(1588-9282)로 문의하여 주세요."
+			}
+			else
+			{
+				msg = "수령시 결제를 선택하셨습니다.\n배달직원에게 직접 결제해주세요\n확인을 누르시면 주문이 완료 됩니다.";
+			}
+		}
+
+		//msg = "결제 완료 후에는 주문의 취소가 불가능합니다. \n불가피하게 취소를 원하실 경우 고객센터(1588-9282)로 문의하여 주세요."
+		if(confirm(msg)){
+			NextChk = true;
+		} else {
+			NextChk = false;
+		}
+	
+		if (NextChk){
+			f.good_mny.value = orderprice;
+			if(payhowval=="card"){
+				f.pay_method.value= "100000000000";
+				f.acceptCharset = 'euc-kr';
+				f.action="/order/allat/allat_card.asp";
+				f.submit();
+				
+			} else if (payhowval=="cash"){
+
+//				window.setTimeout("errer_check()", 50000); 
+				$("#but_confirm").attr("href","javascript:orderprocess_ing()")
+				f.pay_method.value= "010000000000";
+				if(jsf__pay(f)){
+					f.target="cartFrame";
+					f.action="OrderProcess.asp";
+					f.submit();
+				}
+			} else{
+
+//				window.setTimeout("errer_check()", 50000); 
+				$("#but_confirm").attr("href","javascript:orderprocess_ing()")
+				f.target="cartFrame";
+				f.action="OrderProcess.asp";
+				f.submit();
+			}
+		}
+//		paymentpopclose();
+	}
+}
+
+function vgetStrByte(o){
+	var tcount = 0;
+	var tmpStr = new String(o);
+	var temp = tmpStr.length;
+	var onechar;
+	for ( k=0; k<temp; k++ )
+	{
+		onechar = tmpStr.charAt(k);
+		if (escape(onechar).length > 4)
+		{
+			tcount += 1;
+		}
+		else
+		{
+			tcount += 1;
+		}
+	}
+	return tcount;
+}
+
+function OrderTypertn(o){
+	var oCnt = o.length;
+	var rtnVal = "";
+	for (oLoop=0;oLoop<oCnt ;oLoop++ )
+	{
+		if (o[oLoop].checked)
+		{
+			rtnVal = o[oLoop].value;
+		}
+	}
+	return rtnVal;
+}
+
+//Order Confirm
+function OrderConfirmList(){
+	var orderForm = document.orderForm;
+	orderForm.target="_self";
+	orderForm.action="/order/order_complet.html";
+	orderForm.submit();
+}
+
+	function DeliveryDel(custSeq){
+		if (confirm("삭제 하시겠습니까?"))
+		{
+			var f = document.orderForm;
+			f.CustDelSeq.value = custSeq;
+			//f.target="hFrame";
+			f.action="CustDeliveryDel.asp";
+			f.submit();
+
+		// parent.fn_OrderLayer_h();
+		}
+	}
