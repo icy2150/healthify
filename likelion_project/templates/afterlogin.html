@@ -1,0 +1,225 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <title>Healthify</title>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+
+    <!-- Bootstrap CSS -->
+    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/css/bootstrap.min.css"
+        integrity="sha384-Gn5384xqQ1aoWXA+058RXPxPg6fy4IWvTNh0E263XmFcJlSAwiGgFAW/dAiS6JXm" crossorigin="anonymous">
+
+    <!-- JS -->
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.4.1/jquery.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.12.9/umd/popper.min.js"
+        integrity="sha384-ApNbgh9B+Y1QKtv3Rn7W3mgPxhU9K/ScQsAP7hUibX39j7fakFPskvXusvfa0b4Q"
+        crossorigin="anonymous"></script>
+    <script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/js/bootstrap.min.js"
+        integrity="sha384-JZR6Spejh4U02d8jOt6vLEHfe/JQGiRRSQQxSfFWpi1MquVdAyjUar5+76PVCmYl"
+        crossorigin="anonymous"></script>
+
+    <!-- 구글폰트 -->
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;900&display=swap" rel="stylesheet">
+    <style type="text/css">
+        *{
+            font-family: 'Inter', sans-serif;
+            font-weight: 400;
+        }
+	    body {
+	    	background-color: white;
+            display:flex; flex-direction:column; justify-content:center;
+            max-width: max-content;
+            margin: auto;
+            width:auto;
+            height:auto;
+	    }
+        hr {
+            height: 4px;
+            border: none;
+            background-color: darkblue;
+        }
+        .wrap {
+            margin: 10px auto;
+            width: 600px;
+        }
+        .wrap2{
+            margin:40px auto;
+            width:auto;
+            margin-left:12px;
+        }
+        .wrap3{
+            margin: 170px auto;
+            width:650px;
+        }
+        .wrap4{
+            width: 400px;
+            
+        }
+        .wrap5{
+            margin: 60px 1000px;
+        }
+        .wrap1 {
+            margin: 40px auto;
+        }
+        .space2{
+            margin-top: auto auto;
+        }
+        .space{
+            margin: 90px auto;
+            margin-right: 130px;
+        }
+        .space1{
+            margin: 74px auto;
+            margin-right: 190px;
+        }
+        .gfg {
+            position: relative;
+        }
+        .first-txt {
+            position: absolute;
+            top: 17px;
+            left: 50px;
+        }
+        .second-txt{
+            position: absolute;
+            top: 3px;
+            left: 300px;
+        }
+        .center {
+            text-align: center;
+        }
+        .wraps{
+            margin:30px auto;
+            width: 1350px;
+        }
+	    .mytitle {
+	    	color: black;
+	    }
+	    .small-font {
+            color: white;
+	    	font-size: 15px;
+	    }
+        .bolder{
+            font-weight: 900;
+        }
+        .marginright{
+            margin-right: 200px
+        }
+        .smaller-font {
+            font-size:12px; 
+        }
+        .small-grey-font {
+            color: grey;
+            font-size: 15px;
+        }
+        .small-black-font {
+            color:black;
+            font-size: 20px; 
+        }
+        .white-font {
+            color: white;
+        }
+        .large-font {
+            font-size: 55px;
+            color: black;
+        }
+        .darkened-image{
+            filter: brightness(60%);
+    
+        }
+        .image{
+            opacity:1;
+            display: block;
+            transition: 0.5 ease;
+            backface-visibility: hidden;
+        }
+        .middle{
+            transition: 0.5 ease;
+            opacity: 0;
+            position: absolute;
+            top: 50%;
+            left: 50%;
+            transform: translate(-50%, -50%);
+            -ms-transform: translate(-50%, -50%);
+            text-align: center; 
+        }
+        .abcd:hover .image{
+            opacity: 0.3;
+        }
+        .abcd:hover .middle{
+            opacity: 1;
+        }
+        .text{
+            background-color: rgb(13, 13, 78);
+            color: white;
+            font-size: 16px;
+            padding: 16px 32px; 
+            text-align: center;
+            display: inline-block;
+        }
+
+   	</style>
+</head>
+<body>
+    <div class="wraps">
+        <div class="page-header">
+            <a href='/' style="text-decoration:none"><h2 class='bolder' style="color:black">Healthify</h2></a>
+        </div>
+    </div>
+    <hr  width="1522px", size="10", color="blue">
+    <div class="wrap2 container">
+        <div class="row" style="flex-wrap: nowrap;">
+            <div class="column gfg">
+                <div class="abcd">
+                    <img src='https://media.istockphoto.com/photos/confident-doctor-posing-at-the-hospital-picture-id938438758?k=20&m=938438758&s=612x612&w=0&h=p4wXC5Thmy7SbYr2iB5aUVIgqc68P_IPJvcRyVCg9YU=' class='darkened-image image' width='500px' height='400px'>
+                    <div class="first-txt wrap">
+                        <h3 class="white-font bolder center space1">Find healthcare services nearby</h3>
+                    </div>
+                    <div class="first-txt wrap3">
+                        <p class="white-font center wrap4 small-font">Enter your zip code and find available healthcare services nearby in California</p>
+                    </div>
+                    <div class="middle">
+                        <a href="/healthcare" class="bolder text" style="text-decoration:none">Go</a>
+                    </div>
+                </div>
+            </div>
+            <div class="column gfg">
+                <div class='abcd'>
+                    <img src='https://images.unsplash.com/photo-1514425623522-e08e404b4a03?ixlib=rb-1.2.1&ixid=MnwxMjA3fDB8MHxzZWFyY2h8Nnx8cG9ydHJhaXQlMjBvbGQlMjB3b21hbnxlbnwwfHwwfHw%3D&w=1000&q=80' class="darkened-image image" width='500px' height='400px'>
+                    <div class="first-txt wrap">
+                        <h3 class="white-font bolder space center marginright">Set up/ view my medical ID</h3>
+                    </div>
+                    <div class="first-txt wrap3">
+                        <p class="white-font center wrap4 small-font">Record your medical information for immedicate and accurate treatments during emergency</p>
+                    </div>
+                    <div class="middle">
+                        <a href="/medicalid" class="bolder text" style="text-decoration:none">Go</a>
+                    </div>
+                </div>
+            </div>
+            <div class="column gfg">
+                <div class='abcd'> 
+                    <img src='https://newsroom.uw.edu/sites/default/files/styles/feature/public/child_vaccine-getty.jpg?itok=igMkY606&c=a946958c48fc19d2c32369a76879f3ad' class="darkened-image image" width='500px' height='400px'>
+                    <div class="first-txt wrap">
+                        <h3 class="white-font bolder space center marginright">Get vaccination information</h3>
+                    </div>
+                    <div class="first-txt wrap3">
+                        <p class="white-font center wrap4 small-font">Need to get vaccination? Get some information about vaccines and make an appointment</p>
+                    </div>
+                    <div class="middle">
+                        <a href="/vaccine" class="bolder text" style="text-decoration:none">Go</a>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+    <div class="space2 gfg">
+        <img src="https://shop.cadre-components.co.uk/uploads/product/main_Royal_Blue_High_Gloss_ABS_Edging_400.05133.88_77236.jpg" width="1522px" height="220px">
+        <div class="second-txt wrap5">
+            <h2 class="white-font bolder">Healthify</h2>
+            <p class="smaller-font white-font">University of California, Berkeley</p>
+            <p class="smaller-font white-font">icy2150@berkeley.edu</p>
+        </div>
+    </div>
+</body>
+</html>

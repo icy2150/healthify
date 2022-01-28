@@ -1,0 +1,207 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <title>Healthify</title>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+
+    <!-- Bootstrap CSS -->
+    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/css/bootstrap.min.css"
+        integrity="sha384-Gn5384xqQ1aoWXA+058RXPxPg6fy4IWvTNh0E263XmFcJlSAwiGgFAW/dAiS6JXm" crossorigin="anonymous">
+
+    <!-- JS -->
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.4.1/jquery.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.12.9/umd/popper.min.js"
+        integrity="sha384-ApNbgh9B+Y1QKtv3Rn7W3mgPxhU9K/ScQsAP7hUibX39j7fakFPskvXusvfa0b4Q"
+        crossorigin="anonymous"></script>
+    <script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/js/bootstrap.min.js"
+        integrity="sha384-JZR6Spejh4U02d8jOt6vLEHfe/JQGiRRSQQxSfFWpi1MquVdAyjUar5+76PVCmYl"
+        crossorigin="anonymous"></script>
+
+    <!-- 구글폰트 -->
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;900&display=swap" rel="stylesheet">
+    <script>
+        function create() {
+            let firstname = $('#firstname').val();
+            let lastname = $('#lastname').val();
+            let personalemail = $('#personalemail').val();
+            let password = $('#password').val();
+            if(firstname == ''){
+                alert('First name is required');
+                $('#firstname').focus();
+                return;
+            }else if(lastname == ''){
+                alert('Last name is required')
+                $('#lastname').focus();
+                return;
+            }else if(personalemail == ''){
+                alert('Email is required');
+                $('#personalemail').focus();
+                return;
+            }else if(password == ''){
+                alert('Password is required')
+                $('#password').focus();
+                return;
+            }
+            $.ajax({
+            type: 'POST',
+            url: '/create',
+            data:{'firstname_give': firstname, 'lastname_give': lastname,'personalemail_give': personalemail, 'password_give': password},
+            success: function (response) {
+                if (response['result'] == 'success'){
+                    alert(response['msg']);
+                    window.location.reload();
+                }else{
+                    alert('Your email is in use')
+                }
+            }
+        })
+        }
+    </script>
+    <style type="text/css">
+        *{
+            font-family: 'Inter', sans-serif;
+            font-weight: 400;
+        }
+	    body {
+	    	background-color: white;
+            display:flex; flex-direction:column; justify-content:center;
+            max-width: max-content;
+            margin: auto;
+	    }
+        hr {
+            height: 4px;
+            border: none;
+            background-color: darkblue;
+        }
+        .wrap {
+            margin: 10px auto;
+            width: 200px;
+           
+        }
+        .wrap2 {
+            margin: 80px auto;
+        }
+        .wrap5{
+            margin: 60px 1000px;
+        }
+        .wrap1 {
+            margin: 40px auto;
+        }
+        .space {
+            margin: 40px auto;
+        }
+        .space2{
+            margin-top: auto auto;
+        }
+        label{
+            display:inline-block;
+            width: 300px;
+        }
+        .gfg {
+            position: relative;
+        }
+        .smaller-font {
+            font-size:12px; 
+        }
+        .second-txt{
+            position: absolute;
+            top: 3px;
+            left: 300px;
+        }
+        .center {
+            text-align: center;
+        }
+        .upmargin{
+            margin-top: 50px;
+        }
+        .space1{
+            width: 1500px;
+        }
+        .wraps{
+            margin:30px auto;
+            width: 1350px;
+        }
+	    .mytitle {
+	    	color: black;
+	    }
+	    .small-font {
+            color: white;
+	    	font-size: 18px;
+	    }
+        .small-black-font {
+            color:black;
+            font-size: 20px; 
+        }
+        .white-font {
+            color: white;
+        }
+        .large-font {
+            font-size: 55px;
+            color: black;
+        }
+        .button1 {
+            background-color: rgb(21, 69, 128);
+            border: none;
+            width: 200px;
+            color: white;
+            padding: 3px;
+            text-align: center;
+            text-decoration: none;
+            display: inline-block;
+            font-size: 15px;
+            margin: 5px auto;
+            border-radius: 12px;
+
+        }
+        .bolder{
+            font-weight: 900;
+        }
+   	</style>
+</head>
+<body>
+    <div class="wraps">
+        <div class="page-header">
+            <a href='/' style="text-decoration:none"><h2 class='bolder' style="color:black">Healthify</h2></a>
+        </div>
+    </div>
+    <hr  width="1519px", size="10", color="blue">
+    <div class="wrap2">
+        <p>
+            <label class="small-black-font wrap center">
+                First name:    
+            </label>
+            <input type="text" id="firstname">
+        </p>
+        <p>
+            <label class="small-black-font wrap center">
+                Last name:    
+            </label>
+            <input type="text" id="lastname">
+        </p>
+        <p>
+            <label class="small-black-font wrap center">
+                Personal email:    
+            </label>
+            <input type="text" id="personalemail">
+        </p>
+        <p>
+            <label class="small-black-font wrap center">
+                Password: 
+            </label>
+            <input type="password" id="password">
+        </p>
+        <div class="wrap upmargin center">
+            <button class="button1 bolder" onclick="create()">create new account</button>
+        </div>
+    </div>
+    <div class="space2 gfg">
+        <img src="https://shop.cadre-components.co.uk/uploads/product/main_Royal_Blue_High_Gloss_ABS_Edging_400.05133.88_77236.jpg" width="1519px" height="220px">
+        <div class="second-txt wrap5">
+            <h2 class="white-font bolder">Healthify</h2>
+            <p class="smaller-font white-font">University of California, Berkeley</p>
+            <p class="smaller-font white-font">icy2150@berkeley.edu</p>
+        </div>
+    </div>
+</body>
+</html>

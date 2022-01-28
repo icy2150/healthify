@@ -1,0 +1,265 @@
+
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <title>Healthify</title>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+
+    <!-- Bootstrap CSS -->
+    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/css/bootstrap.min.css"
+        integrity="sha384-Gn5384xqQ1aoWXA+058RXPxPg6fy4IWvTNh0E263XmFcJlSAwiGgFAW/dAiS6JXm" crossorigin="anonymous">
+
+    <!-- JS -->
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.4.1/jquery.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.12.9/umd/popper.min.js"
+        integrity="sha384-ApNbgh9B+Y1QKtv3Rn7W3mgPxhU9K/ScQsAP7hUibX39j7fakFPskvXusvfa0b4Q"
+        crossorigin="anonymous"></script>
+    <script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/js/bootstrap.min.js"
+        integrity="sha384-JZR6Spejh4U02d8jOt6vLEHfe/JQGiRRSQQxSfFWpi1MquVdAyjUar5+76PVCmYl"
+        crossorigin="anonymous"></script>
+
+    <!-- 구글폰트 -->
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;900&display=swap" rel="stylesheet">
+    <script>
+        function login() {
+            let email = $('#email').val();
+            let password = $('#password').val();
+            if(email == ''){
+                alert('Email is required');
+                $('#email').focus();
+                return;
+            }else if(password == ''){
+                alert('Password is required')
+                $('#password').focus();
+                return;
+            }
+            $.ajax({
+            type: 'POST',
+            url: '/login',
+            data:{'email_give': email, 'password_give': password},
+            success: function (response) {
+                if (response['result'] == 'success'){
+                    window.location.href='/afterlogin';
+                }else{
+                    alert('email or password not valid')
+                }
+            }
+        })
+        }
+
+    </script>
+    <style type="text/css">
+        *{
+            font-family: 'Inter', sans-serif;
+            font-weight:400;
+        }
+	    body {
+	    	background-color: white;
+            width: auto;
+            height: auto;
+            display:flex; flex-direction:column; justify-content:center;
+            max-width: max-content;
+            margin: auto;
+	    }
+        hr {
+            height: 4px;
+            border: none;
+            background-color: darkblue;
+        }
+        .bolder{
+            font-weight: 900; 
+        }
+        .wrap {
+            margin: 10px auto;
+            width: 600px; 
+        }
+        .wrap2{
+            margin:10px auto;
+            width:1000px;
+        }
+        .wrap3{
+            margin: 30px auto;
+            width:650px;
+        }
+        .wrap6{
+            margin-bottom: 140px;
+            margin-top: 10px;
+            width:900px;
+        }
+        .wrap5{
+            margin: 60px 1000px;
+        }
+        .wrap4{
+            margin: 15px auto;
+            width: 550px; 
+            
+        }
+        .wrap1 {
+            margin: 40px auto;
+        }
+        .space {
+            margin: 40px auto;
+        }
+        .space2{
+            margin-top: auto auto;
+        }
+        .gfg {
+            position: relative;
+        }
+        .first-txt {
+            position: absolute;
+            top: 17px;
+            left: 50px;
+        }
+        .second-txt{
+            position: absolute;
+            top: 3px;
+            left: 300px;
+        }
+        label{
+            display:inline-block;
+            width: 300px;
+        }
+        .center {
+            text-align: center;
+        }
+        .space1{
+            width: auto;
+            height: auto;
+        }
+        .wraps{
+            margin:30px auto;
+            width: 1350px;
+        }
+	    .mytitle {
+	    	color: black;
+	    }
+	    .small-font {
+            color: white;
+	    	font-size: 18px;
+	    }
+        .smaller-font {
+            font-size:12px; 
+        }
+        .small-grey-font {
+            color: grey;
+            font-size: 15px;
+        }
+        .grey-font{
+            color:grey;
+        }
+        .small-black-font {
+            color:black;
+            font-size: 20px; 
+        }
+        .white-font {
+            color: white;
+        }
+        .large-font {
+            font-size: 55px;
+            color: black;
+        }
+        .smaller-black-font{
+            font-size: 17px;
+            text-align: center;
+        }
+        .newwidth{
+            width:130px;
+            margin-left: 100px;
+        }
+        .button {
+            background-color: white;
+            border: none;
+            width: 150px;
+            color: black;
+            padding: 3px;
+            text-align: center;
+            text-decoration: none;
+            display: inline-block;
+            font-size: 15px;
+            margin: 5px auto;
+            border-radius: 12px;
+        }
+        .button1 {
+            background-color: white;
+            border: none;
+            width: 200px;
+            color: black;
+            padding: 3px;
+            text-align: center;
+            text-decoration: none;
+            display: inline-block;
+            font-size: 15px;
+            margin: 5px auto;
+            border-radius: 12px;
+
+        }
+
+   	</style>
+</head>
+<body>
+    <div class="wraps">
+        <div class="page-header">
+            <h2 class="bolder">Healthify</h2>
+        </div>
+    </div>
+    <hr width="1519px", size="10", color="blue">
+    <div class="wraps">
+        <div class="row">
+            <div class="column">
+                <img src="https://www.sharp.com/health-news/images/4-step-guide-to-health-insurance-HN1182-iStock-1288962140-Cover-Re-Sized.jpg" width="650px" height="380px">
+            </div>
+            <div class="column gfg">
+                <img src="https://shop.cadre-components.co.uk/uploads/product/main_Royal_Blue_High_Gloss_ABS_Edging_400.05133.88_77236.jpg" width="700px" height="380px">
+                <div class="first-txt wrap">
+                    <h2 class="white-font center bolder space">Sign in to resume your Healthify!</h2>
+                    <p>
+                        <label class="small-font newwidth center">
+                            Email:  
+                        </label>
+                        <input type="text" id="email">
+                    </p>  
+                    <p>
+                        <label class="small-font newwidth center">
+                            Password: 
+                        </label>
+                        <input type="password" id="password">
+                    </p>
+                    <div class="wrap center">
+                        <button class="button bolder" onclick="login()">login</button>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+    <div class="center space1 gfg">
+        <img src="data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAASwAAACWCAMAAABThUXgAAAAA1BMVEXv7+/sl7qNAAAAQklEQVR4nO3BAQEAAACCIP+vbkhAAQAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAMC7AbBeAAEQPda+AAAAAElFTkSuQmCC" width="1360" height="100px">
+        <div class="second-txt wrap2">
+            <h4 class="second-txt bolder">Not our member yet? <span class="small-grey-font">Get your Healthify started!</span></h4>
+            <div class="wrap1">
+                <a href="/makeacc" class="bolder button1">create new account</a>
+            </div>
+        </div>
+    </div>
+    <div class="space">
+        <img src="https://www.ballroombeachbash.com/images/website/swirl.png" width="1519px" height="110px">
+        <p class="mytitle wrap3 center bolder large-font">What we strive for</p>
+        <p class="small-black-font center wrap4">- To help finding health care locations by Zip Codes</p>
+        <p class="small-black-font center wrap4">- To provide relevant information about vaccinations</p>
+        <p class="small-black-font center wrap4">- To help setting up your own medical ID for emergency</p>
+    </div>
+    <div class="space">
+        <p class='smaller-black-font center grey-font wrap6'>We are willing to assist people who are having difficulties on finding relevant health cares and encourage them to record their own health conditions</p>
+    </div>
+    
+    <div class="space2 gfg">
+        <img src="https://shop.cadre-components.co.uk/uploads/product/main_Royal_Blue_High_Gloss_ABS_Edging_400.05133.88_77236.jpg" width="1519px" height="220px">
+        <div class="second-txt wrap5">
+            <h2 class="bolder white-font">Healthify</h2>
+            <p class="smaller-font white-font">University of California, Berkeley</p>
+            <p class="smaller-font white-font">icy2150@berkeley.edu</p>
+        </div>
+    </div>
+</body>
+</html>

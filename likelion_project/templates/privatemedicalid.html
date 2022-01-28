@@ -1,0 +1,307 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <title>Healthify</title>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+
+    <!-- Bootstrap CSS -->
+    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/css/bootstrap.min.css"
+        integrity="sha384-Gn5384xqQ1aoWXA+058RXPxPg6fy4IWvTNh0E263XmFcJlSAwiGgFAW/dAiS6JXm" crossorigin="anonymous">
+
+    <!-- JS -->
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.4.1/jquery.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.12.9/umd/popper.min.js"
+        integrity="sha384-ApNbgh9B+Y1QKtv3Rn7W3mgPxhU9K/ScQsAP7hUibX39j7fakFPskvXusvfa0b4Q"
+        crossorigin="anonymous"></script>
+    <script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/js/bootstrap.min.js"
+        integrity="sha384-JZR6Spejh4U02d8jOt6vLEHfe/JQGiRRSQQxSfFWpi1MquVdAyjUar5+76PVCmYl"
+        crossorigin="anonymous"></script>
+
+    <!-- 구글폰트 -->
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;900&display=swap" rel="stylesheet">
+    <style type="text/css">
+        *{
+            font-family: 'Inter', sans-serif;
+            font-weight: 400; 
+        }
+	    body {
+	    	background-color: white;
+            display:flex; flex-direction:column; justify-content:center;
+            max-width: max-content;
+            margin: auto;
+	    }
+        hr {
+            height: 4px;
+            border: none;
+            background-color: darkblue;
+        }
+        .bolder{
+            font-weight: 900; 
+        }
+        .wrap2{
+            margin:10px auto;
+            width:1500px;
+        }
+        .wrap5{
+            margin: 60px 1000px;
+        }
+        .space2{
+            margin-top: auto auto;
+        }
+        .gfg {
+            position: relative;
+        }
+        .second-txt{
+            position: absolute;
+            top: 3px;
+            left: 300px;
+        }
+        .center {
+            text-align: center;
+        }
+        .wraps{
+            margin:30px auto;
+            width: 1350px;
+        }
+	    .mytitle {
+	    	color: black;
+	    }
+	    .small-font {
+            color: white;
+	    	font-size: 18px;
+	    }
+        .smaller-font {
+            font-size:12px; 
+        }
+        .small-black-font {
+            color:black;
+            font-size: 17px; 
+        }
+        .white-font {
+            color: white;
+        }
+        table,th, td, tr{
+            border: 1px solid rgb(216, 214, 214);
+            border-style:dotted;
+        }
+        .button {
+            background-color: navy;
+            border: none;
+            width: 240px;
+            color: white;
+            padding: 3px;
+            text-align: center;
+            text-decoration: none;
+            display: inline-block;
+            font-size: 15px;
+            margin: 35px auto;
+            border-radius: 12px;
+        }
+        .marginbottom{
+            margin-bottom: 150px;
+            margin-left: 520px;
+        }
+        .wrap11 {
+            margin: 20px auto;
+        }
+   	</style>
+    <script>
+        $(document).ready(function () {
+            $('#makemedicalid1-box').html('');
+            $('#makemedicalid2-box').html('');
+            $('#makemedicalid3-box').html('');
+            $('#makemedicalid4-box').html('');
+            $('#makemedicalid5-box').html('');
+            $('#makemedicalid6-box').html('');
+            $('#makemedicalid7-box').html('');
+            $('#makemedicalid8-box').html('');
+            $('#makemedicalid9-box').html('');
+            $('#makemedicalid10-box').html('');
+            $('#makemedicalid11-box').html('');
+            $('#makemedicalid12-box').html('');
+            $('#makemedicalid13-box').html('');
+            listing();
+        });
+
+        function listing() {
+            $.ajax({
+                type:"GET",
+                url: "/makemedicalid",
+                data: {},
+                success: function(response) {
+                    if (response['result'] == 'success') {
+                        let makemedicalid = response['makemedicalid']
+                        for (let i = 0; i < makemedicalid.length; i++){
+                            let medicalid = makemedicalid[i]
+                            let name = medicalid['name']
+                            let address = medicalid['address']
+                            let city = medicalid['city']
+                            let zipcode = medicalid['zipcode']
+                            let dateofbirth = medicalid['dateofbirth']
+                            let date = medicalid['date']
+                            let year = medicalid['year']
+                            let bloodtype = medicalid['bloodtype']
+                            let allergies = medicalid['allergies']
+                            let weight = medicalid['weight']
+                            let height = medicalid['height']
+                            let emergencycontact = medicalid['emergencycontact']
+                            let insurancecompany = medicalid['insurancecompany']
+                            let insurancenumber = medicalid['insurancenumber']
+                            let recentsymptoms = medicalid['recentsymptoms']
+                            make_card1(name);
+                            make_card2(address);
+                            make_card3(city);
+                            make_card4(zipcode);
+                            make_card5(dateofbirth, date, year);
+                            make_card6(bloodtype);
+                            make_card7(allergies);
+                            make_card8(weight);
+                            make_card9(height);
+                            make_card10(emergencycontact); 
+                            make_card11(insurancecompany); 
+                            make_card12(insurancenumber); 
+                            make_card13(recentsymptoms); 
+                        }
+                    }else{
+                        alert('Could not update your medical ID'); 
+                    }
+                }
+            })
+        }
+
+        function make_card1(name) {
+            let temp_html = `${name + "  "}`
+            $('#makemedicalid1-box').append(temp_html); 
+        }
+        function make_card2(address){
+            let temp_html = `${address + "   "}`;
+            $('#makemedicalid2-box').append(temp_html); 
+        }
+        function make_card3(city){
+            let temp_html = `${city + "   "}`;
+            $('#makemedicalid3-box').append(temp_html); 
+        }
+        function make_card4(zipcode){
+            let temp_html = `${zipcode + "   "}`;
+            $('#makemedicalid4-box').append(temp_html); 
+        }
+        function make_card5(dateofbirth, date, year){
+            let temp_html = `${dateofbirth}
+                                ${date}
+                                ${year}`;
+            $('#makemedicalid5-box').append(temp_html); 
+        }
+        function make_card6(bloodtype){
+            let temp_html = `${bloodtype + "   "}`;
+            $('#makemedicalid6-box').append(temp_html); 
+        }
+        function make_card7(allergies){
+            let temp_html = `${allergies + "   "}`;
+            $('#makemedicalid7-box').append(temp_html); 
+        }
+        function make_card8(weight){
+            let temp_html = `${weight + "   "}`;
+            $('#makemedicalid8-box').append(temp_html); 
+        }
+        function make_card9(height){
+            let temp_html = `${height + "   "}`;
+            $('#makemedicalid9-box').append(temp_html); 
+        }
+        function make_card10(emergencycontact){
+            let temp_html = `${emergencycontact + "   "}`;
+            $('#makemedicalid10-box').append(temp_html); 
+        }
+        
+        function make_card11(insurancecompany){
+            let temp_html = `${insurancecompany + "   "}`;
+            $('#makemedicalid11-box').append(temp_html); 
+        }
+        function make_card12(insurancenumber){
+            let temp_html = `${insurancenumber + "   "}`;
+            $('#makemedicalid12-box').append(temp_html); 
+        }
+        function make_card13(recentsymptoms){
+            let temp_html = `${recentsymptoms + "   "}`;
+            $('#makemedicalid13-box').append(temp_html); 
+        }
+    </script>
+</head>
+<body>
+    <div class="wraps">
+        <div class="page-header">
+            <a href='/' style="text-decoration:none"><h2 class='bolder' style="color:black">Healthify</h2></a>
+        </div>
+    </div>
+    <hr  width="1519px", size="10", color="blue">
+    <div class="makemedicalid">
+        <table class="table">
+                <tr class="small-black-font center">
+                    <th scope="row">Name</th>
+                    <td id="makemedicalid1-box"></td>
+                </tr>
+                <tr class="small-black-font center">
+                    <th scope="row">Address</th>
+                    <td id="makemedicalid2-box"></td>
+                </tr>
+                <tr class="small-black-font center">
+                    <th scope="row">City</th>
+                    <td id="makemedicalid3-box"></td>
+                </tr>
+                <tr class="small-black-font center">
+                    <th scope="row">Zip code</th>
+                    <td id="makemedicalid4-box"></td>
+                </tr>
+                <tr class="small-black-font center">
+                    <th scope="row">Date of Birth</th>
+                    <td id="makemedicalid5-box"></td>
+                </tr>
+                <tr class="small-black-font center">
+                    <th scope="row">Bloodtype</th>
+                    <td id="makemedicalid6-box"></td>
+                </tr>
+                <tr class="small-black-font center">
+                    <th scope="row">Allergies</th>
+                    <td id="makemedicalid7-box"></td>
+                </tr>
+                <tr class="small-black-font center">
+                    <th scope="row">Weight</th>
+                    <td id="makemedicalid8-box"></td>
+                </tr>
+                <tr class="small-black-font center">
+                    <th scope="row">Height</th>
+                    <td id="makemedicalid9-box"></td>
+                </tr>
+                <tr class="small-black-font center">
+                    <th scope="row">Emergency contact</th>
+                    <td id="makemedicalid10-box"></td>
+                </tr>
+                <tr class="small-black-font center">
+                    <th scope="row">Insurance company</th>
+                    <td id="makemedicalid11-box"></td>
+                </tr>
+                <tr class="small-black-font center">
+                    <th scope="row">Insurance Number</th>
+                    <td id="makemedicalid12-box"></td>
+                </tr>
+                <tr class="small-black-font center">
+                    <th scope='row'>Recent Symptoms</th>
+                    <td id="makemedicalid13-box"></td>
+                </tr>
+            
+        </table>
+    </div>
+    <div class='wrap11'>
+        <a href='/medicalid' class="marginbottom small-black-font button" style="text-decoration:none">Go back to update page</a>
+        <a href="mailto:email@example.com" class="small-black-font button" style="text-decoration:none">Send to my doctor</a>
+    </div>
+    <div class="space2 gfg">
+        <img src="https://shop.cadre-components.co.uk/uploads/product/main_Royal_Blue_High_Gloss_ABS_Edging_400.05133.88_77236.jpg" width="1519px" height="220px">
+        <div class="second-txt wrap5">
+            <h2 class="white-font bolder">Healthify</h2>
+            <p class="smaller-font white-font">University of California, Berkeley</p>
+            <p class="smaller-font white-font">icy2150@berkeley.edu</p>
+        </div>
+    </div>
+</body>
+</html>
